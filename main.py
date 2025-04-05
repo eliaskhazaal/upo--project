@@ -1,4 +1,4 @@
-# 📦 Import libraries
+#libraries
 import streamlit as st
 import pandas as pd
 import yfinance as yf
@@ -13,15 +13,14 @@ import seaborn as sns
 import plotly.express as px
 
 
-# 🎨 Add a logo and title
-col1, col2 = st.columns([1, 3])  # Two columns: 1 for the logo, 3 for the title
+# Add a logo and title, Two columns: 1 for the logo, 3 for the title
+col1, col2 = st.columns([1, 3]) 
 
 with col1:
-    # Display the logo
-    st.image("logo.jpg", width=100)  # Adjust the width as needed
-
-with col2:
-    # Add the title with custom styling
+ 
+    st.image("logo.jpg", width=200)  
+ # Add the title
+with col2: 
     st.markdown("""
         <h1 style='text-align: left;'>
             <span style='color: #3366FF;'>𝑝𝑦</span>
@@ -33,9 +32,6 @@ with col2:
 st.markdown("<hr style='border: 2px solid #FF5733; margin-top: 0;'>", unsafe_allow_html=True)
 
 
-
-
-
 # Sidebar Option Selection
 option = st.sidebar.selectbox("What do you want to do?", ('Stock Analysis', 'Currency Converter', 'Stock Prediction'))
 
@@ -44,7 +40,7 @@ option = st.sidebar.selectbox("What do you want to do?", ('Stock Analysis', 'Cur
 # --------------------- STOCK ANALYSIS ---------------------
 if option == 'Stock Analysis':
     stock_symbol = st.text_input("🔒 Enter the stock symbol (e.g., AAPL for Apple, MSFT for Microsoft):", placeholder="AAPL, MSFT, GOOGL, AMZN")
-    
+   ####select the date 
     col_date1, col_date2 = st.columns(2)
     with col_date1:
         start_date = st.date_input("📅 From:", key="start_date", min_value=pd.to_datetime("2015-01-01"), max_value=pd.to_datetime("today"))
@@ -53,6 +49,7 @@ if option == 'Stock Analysis':
     
     st.divider()
     
+  #-------------- show some information about the stock --------- 
     def fetch_stock_data(symbol):
         try:
             stock = yf.Ticker(symbol)
@@ -132,7 +129,7 @@ if option == 'Stock Analysis':
         except Exception as e:
             st.error(f"Error fetching Income Statement: {e}")
 
-        # Balance Sheet with improved handling
+        # Balance Sheet 
         try:
             balance_sheet = stock.balance_sheet
             if not balance_sheet.empty:
@@ -162,13 +159,13 @@ if option == 'Currency Converter':
 
     amount = st.number_input("Enter the amount", min_value=0.01, value=1.0)
 
-    # Add BTC to currency list
+    # Add currency list
     currencies = ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "SAR", "AED"]
 
     from_currency = st.selectbox("From Currency", currencies)
     to_currency = st.selectbox("To Currency", currencies)
-
-    API_KEY = "f4c2e7e6751628a148086fcd"  # Directly using your API key
+ # my FREE API key (limited 1500 tries per month)
+    API_KEY = "f4c2e7e6751628a148086fcd" 
     api_url = f"https://v6.exchangerate-api.com/v6/{API_KEY}/latest/{from_currency}"
 
     if st.button("Convert"):
@@ -405,6 +402,6 @@ if option == 'Stock Prediction':
     
     
     
-        # Feature Importance 
+        # note
     st.markdown("<hr style='border: 2px solid #FF5733; margin-top: 0;'>", unsafe_allow_html=True)
     st.markdown("👨‍💻 Developed by: Elias khazaal- 20058836")
