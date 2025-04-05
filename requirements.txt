@@ -1,0 +1,18 @@
+#requirements of streamlit project for Introduction to Python
+
+streamlit
+yfinance
+pandas
+numpy
+matplotlib
+plotly
+scikit-learn
+statsmodels
+nltk
+textblob
+requests
+beautifulsoup4
+pdfkit
+seaborn
+flask
+forex-python
